@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Character Stats")]
+    public PlayerStats stats;
+
     // Start is called before the first frame update
     void Start()
     {
