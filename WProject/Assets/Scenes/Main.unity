@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rawImage: {fileID: 946374108}
   tex: {fileID: 0}
+  grabDelay: 0.1
 --- !u!4 &943933019
 Transform:
   m_ObjectHideFlags: 0

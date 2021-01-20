@@ -20,8 +20,14 @@ public class Test : MonoBehaviour
     public Texture2D tex;
 
 
-    public float grabDelay = 0.02f;
+    public float grabDelay = 0.1f;
     private float timer;
+
+    void Awake()
+    {
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 5000;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +42,7 @@ public class Test : MonoBehaviour
 
 
         // Add event handler to the webcam
-        webcam.ImageGrabbed += new System.EventHandler(HandleWebcamQueryFrame);
+        webcam.ImageGrabbed += HandleWebcamQueryFrame;
         // Demarage de la webcam
         webcam.Start();
 
@@ -66,12 +72,12 @@ public class Test : MonoBehaviour
 #endif
                 return;
             }
-            DisplayFrameOnPlane();
         }
     }
 
     private void DisplayFrameOnPlane()
     {
+        if (webcamFrame == null) return;
         if (webcamFrame.IsEmpty) return;
 
         int width = (int)rawImage.rectTransform.rect.width;
@@ -104,18 +110,26 @@ public class Test : MonoBehaviour
 
     private void HandleWebcamQueryFrame(object sender, System.EventArgs e)
     {
+
+        if (webcam == null) return;
         if (webcam.IsOpened)
         {
             webcam.Retrieve(webcamFrame);
         }
+        if (webcamFrame == null) return;
+        if (webcamFrame.IsEmpty) return;
+
         Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
 
         //// we access data, to not cause double access, use locks !
         lock (webcamFrame)
         {
-            webcamFrame = ProcessImage(webcamFrame);
+            DisplayFrameOnPlane();
+
+            // webcamFrame = ProcessImage(webcamFrame);
         }
 
+        //System.Threading.Thread.Sleep(5);
     }
 
     void OnDestroy()
@@ -124,13 +138,17 @@ public class Test : MonoBehaviour
 
         if (webcam != null)
         {
+            webcam.ImageGrabbed -= HandleWebcamQueryFrame;
 
-            Debug.Log("sleeping");
-            //waiting for thread to finish before disposing the camera...(took a while to figure out)
-            System.Threading.Thread.Sleep(100);
-            // close camera
-            webcam.Stop();
-            webcam.Dispose();
+            lock (webcam)
+            {
+                Debug.Log("sleeping");
+                //waiting for thread to finish before disposing the camera...(took a while to figure out)
+                System.Threading.Thread.Sleep(1000);
+                // close camera
+                webcam.Stop();
+                webcam.Dispose();
+            }
         }
 
         Debug.Log("Destroying webcam");
