@@ -19,8 +19,9 @@ public enum EShapeCombination
 }
 
 
-public enum ESpell
+public enum ESpellName
 {
+    None,
     Shield,
     Attack,
     Heal,
@@ -37,9 +38,10 @@ public enum ESpell
 
 public enum ESpellForce
 {
-    Light = 40,
-    Simple = 50,
-    Strong = 100,
+    None = 0,
+    Light = 10,
+    Simple = 30,
+    Strong = 50,
 }
 
 public enum ESpellType
@@ -49,4 +51,11 @@ public enum ESpellType
     Attack,
     Shield,
     SelfDamages
+}
+
+public enum EManaCost
+{
+    Small,
+    Medium,
+    High
 }

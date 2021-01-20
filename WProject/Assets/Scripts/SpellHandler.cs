@@ -4,98 +4,114 @@ using UnityEngine;
 
 public static class SpellHandler
 {
-    public static void CastSpellHandler(EShapeCombination shapeCombination)
+    public static Spell ConvertShapeToSpell(EShapeCombination shapeCombination)
     {
-        ESpell spell;
+        ESpellName spell;
         switch (shapeCombination)
         {
             case EShapeCombination.SIMPLE_RECTANGLE:
-                spell = ESpell.Shield;
+                spell = ESpellName.Shield;
                 break;
             case EShapeCombination.SIMPLE_TRIANGLE:
-                spell = ESpell.Attack;
+                spell = ESpellName.Attack;
                 break;
             case EShapeCombination.SIMPLE_CIRCLE:
-                spell = ESpell.Heal;
+                spell = ESpellName.Heal;
                 break;
             case EShapeCombination.DOUBLE_RECTANGLE:
-                spell = ESpell.StrongShield;
+                spell = ESpellName.StrongShield;
                 break;
             case EShapeCombination.DOUBLE_TRIANGLE:
-                spell = ESpell.StrongAttack;
+                spell = ESpellName.StrongAttack;
                 break;
             case EShapeCombination.DOUBLE_CIRCLE:
-                spell = ESpell.StrongHeal;
+                spell = ESpellName.StrongHeal;
                 break;
             case EShapeCombination.RECTANGLE_TRIANGLE:
-                spell = ESpell.ReflectShield;
+                spell = ESpellName.ReflectShield;
                 break;
             case EShapeCombination.RECTANGLE_CIRCLE:
-                spell = ESpell.HealShield;
+                spell = ESpellName.HealShield;
                 break;
             case EShapeCombination.TRIANGLE_RECTANGLE:
-                spell = ESpell.ShieldAttack;
+                spell = ESpellName.ShieldAttack;
                 break;
             case EShapeCombination.TRIANGLE_CIRCLE:
-                spell = ESpell.LifeSteal;
+                spell = ESpellName.LifeSteal;
                 break;
             case EShapeCombination.CIRCLE_RECTANGLE:
-                spell = ESpell.Armor;
+                spell = ESpellName.Armor;
                 break;
             case EShapeCombination.CIRCLE_TRIANGLE:
-                spell = ESpell.Sacrifice;
+                spell = ESpellName.Sacrifice;
                 break;
             default:
+                spell = ESpellName.None;
                 break;
         }
+
+        return CreateSpell(spell);
     }
 
-    public static Spell GetSpellForce(ESpell spellName)
+    public static Spell CreateSpell(ESpellName spellName)
     {
         List<SpellData> spellDatas = new List<SpellData>();
+        EManaCost manaCost = 0;
 
         switch (spellName)
         {
-            case ESpell.Shield:
+            case ESpellName.Shield:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Shield));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.Attack:
+            case ESpellName.Attack:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Attack));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.Heal:
+            case ESpellName.Heal:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Heal));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.StrongShield:
+            case ESpellName.StrongShield:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Strong, ESpellType.Shield));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.StrongAttack:
+            case ESpellName.StrongAttack:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Strong, ESpellType.Attack));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.StrongHeal:
+            case ESpellName.StrongHeal:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Strong, ESpellType.Heal));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.ReflectShield:
+            case ESpellName.ReflectShield:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Shield));
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Attack));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.HealShield:
+            case ESpellName.HealShield:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Shield));
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Heal));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.ShieldAttack:
+            case ESpellName.ShieldAttack:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Attack));
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Shield));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.LifeSteal:
+            case ESpellName.LifeSteal:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Heal));
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Shield));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.Armor:
+            case ESpellName.Armor:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Armor));
+                manaCost = EManaCost.Small;
                 break;
-            case ESpell.Sacrifice:
+            case ESpellName.Sacrifice:
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.SelfDamages));
                 spellDatas.Add(new SpellData(spellName, ESpellForce.Simple, ESpellType.Attack));
+                manaCost = EManaCost.Small;
                 break;
             default:
                 break;
@@ -103,6 +119,7 @@ public static class SpellHandler
 
         Spell spell = new Spell();
         spell.data = spellDatas;
+        spell.manaCost = manaCost;
         return spell;
     }
 }

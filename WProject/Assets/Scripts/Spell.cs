@@ -5,15 +5,16 @@ using UnityEngine;
 public class Spell
 {
     public List<SpellData> data;
+    public EManaCost manaCost;
 }
 
 public struct SpellData
 {
-    public ESpell spell;
+    public ESpellName spell;
     public ESpellForce force;
     public ESpellType type;
 
-    public SpellData(ESpell _spell, ESpellForce _force, ESpellType _type)
+    public SpellData(ESpellName _spell, ESpellForce _force, ESpellType _type)
     {
         spell = _spell;
         force = _force;

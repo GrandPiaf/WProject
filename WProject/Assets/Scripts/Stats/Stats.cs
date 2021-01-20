@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class Stats : MonoBehaviour
 {
 	public Stat maxHealth;          // Maximum amount of health
 	public int currentHealth { get; protected set; }    // Current amount of health
 
 	public Stat damage;
 	public Stat armor;
+	public Stat mana;
+	public ESpellForce shield;
 
 	public event System.Action OnHealthReachedZero;
 
@@ -18,11 +20,6 @@ public class PlayerStats : MonoBehaviour
 	}
 
 	
-	public virtual void Start()
-	{
-
-	}
-
 	// Damage the character
 	public void TakeDamage(int damage)
 	{
