@@ -2,50 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Spell
+public class Spell
 {
-    public static void StrongAttack()
+    public List<SpellData> data;
+}
+
+public struct SpellData
+{
+    public ESpell spell;
+    public ESpellForce force;
+    public ESpellType type;
+
+    public SpellData(ESpell _spell, ESpellForce _force, ESpellType _type)
     {
-
-    }
-
-    public static void Heal()
-    {
-
-    }
-
-    public static void Shield()
-    {
-
-    }
-
-    public static void BlockHeal()
-    {
-
-    }
-
-    public static void BlockReflect()
-    {
-
-    }
-
-    public static void LifeSteal()
-    {
-
-    }
-
-    public static void ShieldAttack()
-    {
-
-    }
-
-    public static void Sacrifice()
-    {
-
-    }
-
-    public static void Armor()
-    {
-
+        spell = _spell;
+        force = _force;
+        type = _type;
     }
 }
