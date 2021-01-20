@@ -25,14 +25,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    player.stats.TakeDamage(10);
-        //}
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    player.stats.armor.AddModifier(10);
-        //}
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            player.stats.TakeDamage(10);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            player.stats.armor.AddModifier(10);
+        }
     }
 
 

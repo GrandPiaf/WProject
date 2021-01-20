@@ -11,11 +11,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider sliderHealth;
     [SerializeField] Slider sliderArmor;
 
-    [SerializeField] GameObject interactionPanel;
-    [SerializeField] TextMeshProUGUI interactionText;
-    [SerializeField] TextMeshProUGUI bulletMagazineText;
-    [SerializeField] TextMeshProUGUI moneyText;
-
     private void Awake()
     {
         if (Instance == null)
@@ -32,23 +27,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        interactionPanel.SetActive(false);
+        
     }
 
     private void Update()
     {
         sliderHealth.value = GameManager.Instance.player.stats.currentHealth;
         sliderArmor.value = GameManager.Instance.player.stats.armor.GetValue();
-    }
-
-    public void ShowInteractionPanel(string displayText)
-    {
-        interactionPanel.SetActive(true);
-        interactionText.text = displayText;
-    }
-
-    public void HideInteractionPanel()
-    {
-        interactionPanel.SetActive(false);
     }
 }
