@@ -152,7 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rawImage: {fileID: 0}
   tex: {fileID: 0}
-  fileName: Rectangle_Simple.png
+  fileName: Circle_Simple.png
+  dp: 2
+  minDist: 61
 --- !u!4 &448693090
 Transform:
   m_ObjectHideFlags: 0
@@ -410,7 +412,7 @@ RectTransform:
   m_GameObject: {fileID: 1349928088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459646689}
   m_RootOrder: 0
