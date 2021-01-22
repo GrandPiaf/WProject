@@ -152,9 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rawImage: {fileID: 0}
   tex: {fileID: 0}
-  fileName: Circle_Simple.png
-  dp: 2
-  minDist: 61
+  fileName: Rectangle_Simple.png
+  approxVar: 0.03999999910593033
 --- !u!4 &448693090
 Transform:
   m_ObjectHideFlags: 0
