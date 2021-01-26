@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum EShapeCombination
 {
+    NONE,
     SIMPLE_RECTANGLE,
     SIMPLE_TRIANGLE,
     SIMPLE_CIRCLE,
