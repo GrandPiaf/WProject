@@ -60,3 +60,4 @@ public enum EManaCost
     Medium = 20,
     High = 50
 }
+

@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] Slider sliderHealth;
     [SerializeField] Slider sliderArmor;
+    [SerializeField] Slider sliderMana;
 
     private void Awake()
     {
@@ -34,5 +35,6 @@ public class UIManager : MonoBehaviour
     {
         sliderHealth.value = GameManager.Instance.player.stats.currentHealth;
         sliderArmor.value = GameManager.Instance.player.stats.armor.GetValue();
+        sliderMana.value = GameManager.Instance.player.mana;
     }
 }
