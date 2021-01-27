@@ -9,8 +9,6 @@ public class Stats : MonoBehaviour
 
 	public Stat damage;
 	public Stat armor;
-	public Stat mana;
-	public ESpellForce shield;
 
 	public event System.Action OnHealthReachedZero;
 

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 448693090}
   - component: {fileID: 448693089}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ShapeDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,6 +154,8 @@ MonoBehaviour:
   tex: {fileID: 0}
   fileName: Rectangle_Simple.png
   approxVar: 0.03999999910593033
+  areaThreshold: 250
+  showType: 0
 --- !u!4 &448693090
 Transform:
   m_ObjectHideFlags: 0

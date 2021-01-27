@@ -6,5 +6,7 @@ public class Character : MonoBehaviour
 {
     [Header("Character Stats")]
     public Stats stats;
+
     public int mana;
+	public ESpellForce shield;
 }

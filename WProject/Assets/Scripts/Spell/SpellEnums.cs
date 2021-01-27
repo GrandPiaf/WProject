@@ -20,7 +20,7 @@ public enum EShapeCombination
 }
 
 
-public enum ESpellName
+public enum ESpell
 {
     None,
     Shield,
@@ -37,6 +37,14 @@ public enum ESpellName
     Sacrifice
 }
 
+public enum ESpellEffect{
+    Heal,
+    Armor,
+    Attack,
+    Shield,
+    SelfDamages
+}
+
 public enum ESpellForce
 {
     None = 0,
@@ -45,18 +53,10 @@ public enum ESpellForce
     Strong = 50,
 }
 
-public enum ESpellType
-{ 
-    Heal,
-    Armor,
-    Attack,
-    Shield,
-    SelfDamages
-}
 
 public enum EManaCost
 {
-    Small,
-    Medium,
-    High
+    Small = 10,
+    Medium = 20,
+    High = 50
 }
