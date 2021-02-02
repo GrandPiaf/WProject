@@ -58,56 +58,56 @@ public static class SpellBuilder {
         switch (spellType) {
             case ESpell.Shield:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Shield));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.Attack:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Attack));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.Heal:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Heal));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.StrongShield:
                 spellCompos.Add(new SpellComponent(ESpellForce.Strong, ESpellEffect.Shield));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.StrongAttack:
                 spellCompos.Add(new SpellComponent(ESpellForce.Strong, ESpellEffect.Attack));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.StrongHeal:
                 spellCompos.Add(new SpellComponent(ESpellForce.Strong, ESpellEffect.Heal));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.ReflectShield:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Shield));
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Attack));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.HealShield:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Shield));
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Heal));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.ShieldAttack:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Attack));
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Shield));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.LifeSteal:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Heal));
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Shield));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.Armor:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Armor));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             case ESpell.Sacrifice:
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.SelfDamages));
                 spellCompos.Add(new SpellComponent(ESpellForce.Simple, ESpellEffect.Attack));
-                manaCost = EManaCost.Small;
+                manaCost = EManaCost.Medium;
                 break;
             default:
                 break;

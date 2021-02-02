@@ -26,7 +26,7 @@ public class Stats : MonoBehaviour
 		int healthDamage = Mathf.Min(currentHealth, damage - armorDamage);
 		armor.AddModifier(-armorDamage);
 		currentHealth -= healthDamage;
-		Debug.Log(transform.name + " takes " + armorDamage + " armor damage and " + healthDamage + " health damage");
+		//Debug.Log(transform.name + " takes " + armorDamage + " armor damage and " + healthDamage + " health damage");
 
 		// If we hit 0. Die.
 		if (currentHealth <= 0)
