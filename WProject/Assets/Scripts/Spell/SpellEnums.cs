@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EShapeCombination
-{
+public enum EShapeCombination {
     NONE,
     SIMPLE_RECTANGLE,
     SIMPLE_TRIANGLE,
@@ -20,8 +19,7 @@ public enum EShapeCombination
 }
 
 
-public enum ESpell
-{
+public enum ESpell {
     None,
     Shield,
     Attack,
@@ -34,10 +32,11 @@ public enum ESpell
     ShieldAttack,
     LifeSteal,
     Armor,
-    Sacrifice
+    Sacrifice,
+    COUNT
 }
 
-public enum ESpellEffect{
+public enum ESpellEffect {
     Heal,
     Armor,
     Attack,
@@ -45,8 +44,7 @@ public enum ESpellEffect{
     SelfDamages
 }
 
-public enum ESpellForce
-{
+public enum ESpellForce {
     None = 0,
     Light = 10,
     Simple = 30,
@@ -54,8 +52,7 @@ public enum ESpellForce
 }
 
 
-public enum EManaCost
-{
+public enum EManaCost {
     Small = 10,
     Medium = 20,
     High = 50

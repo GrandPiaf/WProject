@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
 
     public EnemyBot[] enemies;
 
-    public int turnTime;
     public float timer;
 
     //TEST
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
         #region TEST
         List<string> list = new List<string>();
-        for (int i = 0; i <= (int)ESpell.Sacrifice; i++) {
+        for (int i = 0; i < (int)ESpell.COUNT; i++) {
             list.Add(((ESpell)i).ToString());
         }
         testDropDown.AddOptions(list);
@@ -97,7 +96,7 @@ public class GameManager : MonoBehaviour {
     public void PlayTestCard() {
 
         string s = testDropDown.options[testDropDown.value].text;
-        for (int i = 0; i <= (int)ESpell.Sacrifice; i++) {
+        for (int i = 0; i < (int)ESpell.COUNT; i++) {
             ESpell eSpell = (ESpell)i;
 
             if (s == eSpell.ToString()) {
