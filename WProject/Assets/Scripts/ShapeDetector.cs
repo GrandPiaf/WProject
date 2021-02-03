@@ -18,6 +18,10 @@ public enum ShowType {
 
 public class ShapeDetector : MonoBehaviour {
 
+    //Webcam
+    private Emgu.CV.VideoCapture webcam;
+    public Mat webcamFrame;
+
     // Unity components
     public UnityEngine.UI.RawImage rawImage;
     public Texture2D tex;
@@ -39,18 +43,69 @@ public class ShapeDetector : MonoBehaviour {
 
     EShapeCombination combinationFound;
 
+    public float grabDelay = 0.1f;
+    private float timer;
+
 
     // Start is called before the first frame update
     void Start() {
+        // Debug.Log("starting webcam");
+        // Launch webcam capture
+        // Manière Sans webcam (video)
+        //webcam = new Emgu.CV.VideoCapture("D:\\Programmes\\UnityWorspace\\video.mp4");
+        // Manière Avec Webcam (flux de la webcam)
+        webcam = new Emgu.CV.VideoCapture(0, VideoCapture.API.DShow);
+        webcamFrame = new Mat();
+
+        // Add event handler to the webcam
+        webcam.ImageGrabbed += HandleWebcamQueryFrame;
+        // Demarage de la webcam
+        webcam.Start();
+
         // Retrieving unity webcam screen
         rawImage = GameObject.Find("WebcamScreen").GetComponent<UnityEngine.UI.RawImage>();
     }
 
 
     void Update() {
-        combinationFound = GetShapeCombination(GetFrame());
-        Debug.Log(combinationFound);
-        RenderImage();
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0 && webcam.IsOpened) {
+            timer = grabDelay;
+
+            bool grabbed = webcam.Grab();
+
+            if (!grabbed) {
+                //Debug.Log("no more grab");
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                        Application.Quit();
+#endif
+                return;
+            }
+        }
+    }
+
+    private void HandleWebcamQueryFrame(object sender, System.EventArgs e) {
+
+        if (webcam == null) return;
+        if (webcam.IsOpened) {
+            webcam.Retrieve(webcamFrame);
+        }
+        if (webcamFrame == null) return;
+        if (webcamFrame.IsEmpty) return;
+
+        //Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
+
+        lock (webcamFrame) {
+            combinationFound = GetShapeCombination(webcamFrame);
+            Debug.Log(combinationFound);
+            RenderImage();
+        }
+
+        //System.Threading.Thread.Sleep(5);
     }
 
     void ResetVariables() {
@@ -63,10 +118,6 @@ public class ShapeDetector : MonoBehaviour {
             Destroy(tex);
             tex = null;
         }
-    }
-
-    Mat GetFrame() {
-        return new Mat(@"..\TestImages\" + fileName); ;
     }
 
     public EShapeCombination GetShapeCombination(Mat frame) {
