@@ -24,9 +24,9 @@ public class ShapeDetectorEditor : Editor
 
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-        ShapeDetector shapeDetect = (ShapeDetector)target;
+        //ShapeDetector shapeDetect = (ShapeDetector)target;
 
-        choiceIndex = EditorGUILayout.Popup("Player", choiceIndex, choices);
-        shapeDetect.fileName = choices[choiceIndex];
+        //choiceIndex = EditorGUILayout.Popup("Player", choiceIndex, choices);
+        //shapeDetect.fileName = choices[choiceIndex];
     }
 }

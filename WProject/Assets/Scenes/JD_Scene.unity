@@ -141,6 +141,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3900010239219205560, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900010239219205560, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5385531026023201571, guid: 6d4fbf51aede3324296964b186dba0e4,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -163,7 +173,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5933265390251088089, guid: 6d4fbf51aede3324296964b186dba0e4,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933265390251088089, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120973652956047207, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6425113453411069602, guid: 6d4fbf51aede3324296964b186dba0e4,
@@ -291,8 +311,296 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1100072059}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: d38601437f8627b49b92a501ea7c6b4f,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4837297665d350342a662dd3a362a414,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[9]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[10]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[11]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[12]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[13]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[14]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[15]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[16]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[17]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[18]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[19]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[20]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[21]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[22]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[23]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[24]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[25]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[26]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[27]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[28]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[29]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[30]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[31]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[32]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 7063777021107519397, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[33]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 2085680740}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: sliderMana
+      value: 
+      objectReference: {fileID: 1942890077}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: sliderArmor
+      value: 
+      objectReference: {fileID: 1092530726}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldSprite
+      value: 
+      objectReference: {fileID: 37379196}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: sliderHealth
+      value: 
+      objectReference: {fileID: 1002660298}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: d38601437f8627b49b92a501ea7c6b4f,
+        type: 3}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4837297665d350342a662dd3a362a414,
+        type: 3}
+    - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: shieldIcons.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
+        type: 3}
+    - target: {fileID: 8484339007639210184, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484339007639210184, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d4fbf51aede3324296964b186dba0e4, type: 3}
+--- !u!114 &37379196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8484339007639210184, guid: 6d4fbf51aede3324296964b186dba0e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 37379195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &206515298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8462312800762382677, guid: 3b43be757d3c4f54b9d3d3e036f7640c,
@@ -541,6 +849,18 @@ RectTransform:
   m_AnchoredPosition: {x: -243.14917, y: 116.03967}
   m_SizeDelta: {x: 486.29834, y: 232.07935}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1002660298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6908648353129555466, guid: 6d4fbf51aede3324296964b186dba0e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 37379195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047530367
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1047530368
 Transform:
   m_ObjectHideFlags: 0
@@ -887,6 +1207,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1092530726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3389002580572570635, guid: 6d4fbf51aede3324296964b186dba0e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 37379195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1100072056
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,8 +1228,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100072058}
-  - component: {fileID: 1100072057}
   - component: {fileID: 1100072059}
+  - component: {fileID: 1100072057}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -952,6 +1284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1100072057}
   mana: 50
+  manaRegen: 0.1
+  manaMax: 100
   shield: 0
   reflectingShield: 0
 --- !u!1 &1179850707
@@ -1481,6 +1815,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b43be757d3c4f54b9d3d3e036f7640c, type: 3}
+--- !u!114 &1942890077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4657217985043005576, guid: 6d4fbf51aede3324296964b186dba0e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 37379195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2085680738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,8 +1874,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 2085680741}
   mana: 0
+  manaRegen: 0.1
+  manaMax: 100
   shield: 0
   reflectingShield: 0
+  attackDelay: 3
 --- !u!114 &2085680741
 MonoBehaviour:
   m_ObjectHideFlags: 0

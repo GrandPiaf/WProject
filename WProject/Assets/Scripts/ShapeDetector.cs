@@ -48,7 +48,7 @@ public class ShapeDetector : MonoBehaviour {
 
 
     void Update() {
-        combinationFound = GetShapeCombination();
+        combinationFound = GetShapeCombination(GetFrame());
         Debug.Log(combinationFound);
         RenderImage();
     }
@@ -69,13 +69,11 @@ public class ShapeDetector : MonoBehaviour {
         return new Mat(@"..\TestImages\" + fileName); ;
     }
 
-    EShapeCombination GetShapeCombination() {
-
+    public EShapeCombination GetShapeCombination(Mat frame) {
         ResetVariables();
-        Mat frame = GetFrame();
-        
-        
-        /** ARUCO MARKERS **/
+
+        #region Aruco
+        ///** ARUCO MARKERS **/
 
         // Markers ID
         VectorOfInt markersID = new VectorOfInt();
@@ -142,7 +140,7 @@ public class ShapeDetector : MonoBehaviour {
 
         // Extraction
         subArucoArea = new Mat(frame, boundingBox);
-
+        #endregion
 
         /** SHAPE DETECTION **/
 
@@ -154,6 +152,9 @@ public class ShapeDetector : MonoBehaviour {
 
         Mat image = new Mat();
         CvInvoke.CvtColor(subArucoAreaNegative, image, ColorConversion.Bgr2Gray);
+
+        //Mat image = new Mat();
+        //CvInvoke.CvtColor(frame, image, ColorConversion.Bgr2Gray);
 
         VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
         CvInvoke.FindContours(image, contours, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
@@ -209,7 +210,8 @@ public class ShapeDetector : MonoBehaviour {
                 outisdeArea = area;
                 insideShape = outsideShape;
                 outsideShape = currentShape;
-            } else {
+            }
+            else {
                 insideShape = currentShape;
             }
 
