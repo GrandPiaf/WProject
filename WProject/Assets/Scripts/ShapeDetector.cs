@@ -66,6 +66,76 @@ public class ShapeDetector : MonoBehaviour {
         rawImage = GameObject.Find("WebcamScreen").GetComponent<UnityEngine.UI.RawImage>();
     }
 
+    private void DisplayFrameOnPlane() {
+        if (webcamFrame == null) return;
+        if (webcamFrame.IsEmpty) return;
+
+        int width = (int)rawImage.rectTransform.rect.width;
+        int height = (int)rawImage.rectTransform.rect.height;
+
+        // destroy existing texture
+        if (tex != null) {
+            Destroy(tex);
+            tex = null;
+        }
+
+        // creating new texture to hold our frame
+        tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+
+        // Resize mat to the texture format
+        CvInvoke.Resize(webcamFrame, webcamFrame, new System.Drawing.Size(width, height));
+        // Convert to unity texture format ( RGBA )
+        CvInvoke.CvtColor(webcamFrame, webcamFrame, ColorConversion.Bgr2Rgba);
+        // Flipping because unity texture is inverted.
+        CvInvoke.Flip(webcamFrame, webcamFrame, FlipType.Vertical);
+
+        // loading texture in texture object
+        tex.LoadRawTextureData(webcamFrame.ToImage<Rgba, byte>().Bytes);
+        tex.Apply();
+
+        // assigning texture to gameObject
+        rawImage.texture = tex;
+    }
+
+    private void HandleWebcamQueryFrame(object sender, System.EventArgs e) {
+
+        if (webcam == null) return;
+        if (webcam.IsOpened) {
+            webcam.Retrieve(webcamFrame);
+        }
+        if (webcamFrame == null) return;
+        if (webcamFrame.IsEmpty) return;
+
+        //Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
+
+        lock (webcamFrame) {
+            DisplayFrameOnPlane();
+
+            // webcamFrame = ProcessImage(webcamFrame);
+            //EShapeCombination combination = detector.GetShapeCombination(webcamFrame);
+            //Debug.Log("Combination : " + combination.ToString());
+        }
+
+        //System.Threading.Thread.Sleep(5);
+    }
+
+    void OnDestroy() {
+        //Debug.Log("entering destroy");
+
+        if (webcam != null) {
+            webcam.ImageGrabbed -= HandleWebcamQueryFrame;
+
+            lock (webcam) {
+                //Debug.Log("sleeping");
+                //waiting for thread to finish before disposing the camera...(took a while to figure out)
+                System.Threading.Thread.Sleep(1000);
+                // close camera
+                webcam.Stop();
+                webcam.Dispose();
+            }
+        }
+
+    }
 
     void Update() {
 

@@ -399,7 +399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558669073}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c8f73fa4a9c7e4195872dc42d95d01, type: 3}
   m_Name: 
@@ -439,6 +439,7 @@ MonoBehaviour:
   approxVar: 0.04
   areaThreshold: 250
   showType: 0
+  grabDelay: 0.1
 --- !u!1 &1889412896
 GameObject:
   m_ObjectHideFlags: 0
