@@ -180,6 +180,12 @@ public class ShapeDetector : MonoBehaviour {
         lock (webcamFrame) {
             combinationFound = GetShapeCombination(webcamFrame);
             Debug.Log(combinationFound);
+            Spell spell = SpellBuilder.ConvertShapeToSpell(combinationFound);
+            Player player = FindObjectOfType<Player>();
+            if (player != null) {
+                bool success = player.PlayCard(spell, GameManager.Instance.enemies[0]);
+            }
+            
             RenderImage();
         }
 
@@ -310,9 +316,6 @@ public class ShapeDetector : MonoBehaviour {
         if (filteredContours.Size < 1 || filteredContours.Size > 2) {
             return EShapeCombination.NONE;
         }
-
-        Debug.Log("Filtered contour nbr : " + filteredContours.Size);
-        Debug.Log("Contour nbr : " + contours.Size);
 
         double outisdeArea = 0;
         Shape outsideShape = Shape.None;

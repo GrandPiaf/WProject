@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EnemyBot : Character {
 
-    public float attackDelay = 5f;
-    float timer = 0f;
+
+    public override void ResetCharacter() {
+        base.ResetCharacter();
+        attackDelay *= 1 - FindObjectOfType<GameManager>().score / 100;
+    }
 
     // Update is called once per frame
-    void Update() {
-        timer += Time.deltaTime;
-        if (timer >= attackDelay) {
-            timer = 0;
+    override public void Update() {
+        base.Update();
             ESpell eSpell = (ESpell)Random.Range(0, (int)ESpell.COUNT);
             Spell spell = SpellBuilder.CreateSpell(eSpell);
             bool success = PlayCard(spell, GameManager.Instance.player);
             if (success) Debug.Log("Spell played : " + eSpell.ToString());
-        }
     }
 }

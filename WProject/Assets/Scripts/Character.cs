@@ -11,6 +11,11 @@ public class Character : MonoBehaviour {
     public float manaRegen = 0.5f;
     public int manaMax = 100;
 
+    public float attackDelay = 5f;
+    public float timer = 0f;
+
+    public bool isDead = false;
+
     [HideInInspector]
     public ESpellForce shield;
     [HideInInspector]
@@ -24,15 +29,37 @@ public class Character : MonoBehaviour {
             mana = manaMax;
     }
 
+    virtual public void Update() {
+        timer += Time.deltaTime;
+        if(stats.currentHealth <= 0) {
+            isDead = true;
+        }
+    }
+
+     virtual public void ResetCharacter() {
+        this.stats.Heal(stats.maxHealth.baseValue);
+        this.mana = manaMax;
+        this.isDead = false;
+    }
+
     public bool PlayCard(Spell spell, Character target) {
 
-        if (mana < (int)spell.manaCost) return false;
+        if (timer >= attackDelay) {
+            timer = 0;
 
-        foreach (SpellComponent component in spell.components) {
-            HandleSpellComponnent(component, this, target);
+            if (mana < (int)spell.manaCost) return false;
+
+            foreach (SpellComponent component in spell.components) {
+                HandleSpellComponnent(component, this, target);
+            }
+            mana -= (int)spell.manaCost;
+
+            Debug.Log("Spell played : " + spell.type.ToString() + " launched by : " + gameObject.name);
+
+            return true;
         }
-        mana -= (int)spell.manaCost;
-        return true;
+        return false;
+
     }
 
     public void HandleSpellComponnent(SpellComponent component, Character caster, Character target) {

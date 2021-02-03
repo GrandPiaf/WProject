@@ -136,6 +136,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1279201490894317889, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582974068202892471, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2865310352063539725, guid: 6d4fbf51aede3324296964b186dba0e4,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -151,6 +161,16 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4627182611746053078, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911423632478444983, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5385531026023201571, guid: 6d4fbf51aede3324296964b186dba0e4,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -289,6 +309,11 @@ PrefabInstance:
     - target: {fileID: 6425113453411069602, guid: 6d4fbf51aede3324296964b186dba0e4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442570195552263825, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6699141146419636783, guid: 6d4fbf51aede3324296964b186dba0e4,
@@ -524,6 +549,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 0cf8a8b15a8d6c040968b247ccf2bc78,
         type: 3}
+    - target: {fileID: 7803722470986137568, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8389946420910131858, guid: 6d4fbf51aede3324296964b186dba0e4,
         type: 3}
       propertyPath: character
@@ -587,6 +617,11 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8490085647734452887, guid: 6d4fbf51aede3324296964b186dba0e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d4fbf51aede3324296964b186dba0e4, type: 3}
 --- !u!114 &37379196 stripped
@@ -1286,6 +1321,9 @@ MonoBehaviour:
   mana: 50
   manaRegen: 0.1
   manaMax: 100
+  attackDelay: 5
+  timer: 0
+  isDead: 0
   shield: 0
   reflectingShield: 0
 --- !u!1 &1179850707
@@ -1297,6 +1335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179850708}
+  - component: {fileID: 1179850709}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -1322,6 +1361,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1179850709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179850707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7f3cb61f293eb43b330e57c0df23e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawImage: {fileID: 0}
+  tex: {fileID: 0}
+  fileName: 
+  approxVar: 0.04
+  areaThreshold: 250
+  showType: 0
+  grabDelay: 0.1
 --- !u!1 &1317121515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,9 +1934,11 @@ MonoBehaviour:
   mana: 0
   manaRegen: 0.1
   manaMax: 100
+  attackDelay: 3
+  timer: 0
+  isDead: 0
   shield: 0
   reflectingShield: 0
-  attackDelay: 3
 --- !u!114 &2085680741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 
     public float timer;
 
+    public int score = 0;
     //TEST
     public Dropdown testDropDown;
 
@@ -48,6 +49,22 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.A)) {
             player.stats.armor.AddModifier(10);
         }
+
+        if (enemies[0].isDead) {
+            score++;
+            enemies[0].ResetCharacter();
+        }
+
+        if (player.isDead) {
+            PauseMenu menu = FindObjectOfType<PauseMenu>();
+            menu.ShowEndMenu();
+        }
+    }
+
+    public void ResetGame() {
+        score = 0;
+        enemies[0].ResetCharacter();
+        player.ResetCharacter();
     }
 
     //TEST

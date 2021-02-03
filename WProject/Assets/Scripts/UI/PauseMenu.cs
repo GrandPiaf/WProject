@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public class PauseMenu : MonoBehaviour
     //public GameObject winMenuUI;
     public GameObject pauseMenuUI;
     public GameObject optionMenuUI;
+    public GameObject endGameMenuUI;
+    public TextMeshProUGUI endGameMenuUIScoreText;
 
     public Slider volumeSlider;
     public Slider volumeMusicSlider;
@@ -104,5 +107,20 @@ public class PauseMenu : MonoBehaviour
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ShowEndMenu() {
+
+        Time.timeScale = 0f;
+        endGameMenuUI.SetActive(true);
+        endGameMenuUIScoreText.text = "Score : " + GameManager.Instance.score;
+
+    }
+
+    public void HideEndMenu() {
+
+        Time.timeScale = 1f;
+        endGameMenuUI.SetActive(false);
+        GameManager.Instance.ResetGame();
     }
 }
