@@ -13,6 +13,10 @@ using Emgu.CV.Aruco;
 public enum ShowType {
     Plain_Aruco_Image,
     Sub_Aruco_Image,
+    Sub_Negative_Aruco_Image,
+    Sub_Negative_Aruco_Image_Gray,
+    Sub_Negative_Aruco_Image_Gray_Blur,
+    Sub_Negative_Aruco_Image_Gray_Binary,
     Shape_Sub_Aruco_Image
 }
 
@@ -39,6 +43,10 @@ public class ShapeDetector : MonoBehaviour {
     /** Mat to show **/
     private Mat plainArucoImage;
     private Mat subArucoArea;
+    private Mat subArucoAreaNegative;
+    private Mat subArucoAreaNegativeGray;
+    private Mat subArucoAreaNegativeGrayBlur;
+    private Mat subArucoAreaNegativeGrayBinary;
     private Mat shapeSubArucoArea;
 
     EShapeCombination combinationFound;
@@ -97,27 +105,27 @@ public class ShapeDetector : MonoBehaviour {
         rawImage.texture = tex;
     }
 
-    private void HandleWebcamQueryFrame(object sender, System.EventArgs e) {
+    //private void HandleWebcamQueryFrame(object sender, System.EventArgs e) {
 
-        if (webcam == null) return;
-        if (webcam.IsOpened) {
-            webcam.Retrieve(webcamFrame);
-        }
-        if (webcamFrame == null) return;
-        if (webcamFrame.IsEmpty) return;
+    //    if (webcam == null) return;
+    //    if (webcam.IsOpened) {
+    //        webcam.Retrieve(webcamFrame);
+    //    }
+    //    if (webcamFrame == null) return;
+    //    if (webcamFrame.IsEmpty) return;
 
-        //Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
+    //    //Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
 
-        lock (webcamFrame) {
-            DisplayFrameOnPlane();
+    //    lock (webcamFrame) {
+    //        DisplayFrameOnPlane();
 
-            // webcamFrame = ProcessImage(webcamFrame);
-            //EShapeCombination combination = detector.GetShapeCombination(webcamFrame);
-            //Debug.Log("Combination : " + combination.ToString());
-        }
+    //        // webcamFrame = ProcessImage(webcamFrame);
+    //        //EShapeCombination combination = detector.GetShapeCombination(webcamFrame);
+    //        //Debug.Log("Combination : " + combination.ToString());
+    //    }
 
-        //System.Threading.Thread.Sleep(5);
-    }
+    //    //System.Threading.Thread.Sleep(5);
+    //}
 
     void OnDestroy() {
         //Debug.Log("entering destroy");
@@ -181,6 +189,10 @@ public class ShapeDetector : MonoBehaviour {
     void ResetVariables() {
         plainArucoImage = new Mat();
         subArucoArea = new Mat();
+        subArucoAreaNegative = new Mat();
+        subArucoAreaNegativeGray = new Mat();
+        subArucoAreaNegativeGrayBinary = new Mat();
+        subArucoAreaNegativeGrayBlur = new Mat();
         shapeSubArucoArea = new Mat();
 
         // destroy existing texture
@@ -264,21 +276,25 @@ public class ShapeDetector : MonoBehaviour {
         #endregion
 
         /** SHAPE DETECTION **/
+        Mat binaryMat = new Mat();
+        CvInvoke.Threshold(subArucoArea, binaryMat, 250, 500, ThresholdType.Binary);
 
-        //Take negative
-        Mat subArucoAreaNegative = new Mat();
         CvInvoke.BitwiseNot(subArucoArea, subArucoAreaNegative);
 
         Image<Bgr, byte> img = subArucoAreaNegative.ToImage<Bgr, byte>();
 
-        Mat image = new Mat();
-        CvInvoke.CvtColor(subArucoAreaNegative, image, ColorConversion.Bgr2Gray);
+        CvInvoke.CvtColor(subArucoAreaNegative, subArucoAreaNegativeGray, ColorConversion.Bgr2Gray);
+
+        //CvInvoke.GaussianBlur(subArucoAreaNegativeGray, subArucoAreaNegativeGrayBlur, new Size(5, 5), 0);
+
+        CvInvoke.Threshold(subArucoAreaNegativeGray, subArucoAreaNegativeGrayBinary, 0, 255, ThresholdType.Otsu);
+        //CvInvoke.AdaptiveThreshold(subArucoAreaNegativeGray, subArucoAreaNegativeGrayBinary, 255, AdaptiveThresholdType.MeanC, ThresholdType.Binary, 11, 2.0);
 
         //Mat image = new Mat();
         //CvInvoke.CvtColor(frame, image, ColorConversion.Bgr2Gray);
 
         VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
-        CvInvoke.FindContours(image, contours, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
+        CvInvoke.FindContours(subArucoAreaNegativeGrayBinary, contours, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
 
         //Filter small areas
         VectorOfVectorOfPoint filteredContours = new VectorOfVectorOfPoint();
@@ -295,6 +311,9 @@ public class ShapeDetector : MonoBehaviour {
             return EShapeCombination.NONE;
         }
 
+        Debug.Log("Filtered contour nbr : " + filteredContours.Size);
+        Debug.Log("Contour nbr : " + contours.Size);
+
         double outisdeArea = 0;
         Shape outsideShape = Shape.None;
         Shape insideShape = Shape.None;
@@ -305,7 +324,7 @@ public class ShapeDetector : MonoBehaviour {
             VectorOfPoint approx = new VectorOfPoint();
             CvInvoke.ApproxPolyDP(filteredContours[i], approx, approxVar * perimeter, true);
 
-            CvInvoke.DrawContours(img, filteredContours, i, new MCvScalar(0, 0, 255), 1);
+            CvInvoke.DrawContours(img, filteredContours, i, new MCvScalar(0, 0, 0), 1);
             img.Draw(CvInvoke.MinAreaRect(approx), new Bgr(System.Drawing.Color.Orange), 2);
             var moments = CvInvoke.Moments(filteredContours[i]);
             int x = (int)(moments.M10 / moments.M00) - 35;
@@ -338,7 +357,7 @@ public class ShapeDetector : MonoBehaviour {
 
             RotatedRect approxMinRect = CvInvoke.MinAreaRect(approx);
             RotatedRect minRect = CvInvoke.MinAreaRect(filteredContours[i]);
-            img.Draw(minRect, new Bgr(System.Drawing.Color.Silver), 2);
+            img.Draw(minRect, new Bgr(System.Drawing.Color.Red), 2);
 
         }
 
@@ -406,6 +425,18 @@ public class ShapeDetector : MonoBehaviour {
                 break;
             case ShowType.Sub_Aruco_Image:
                 toShow = subArucoArea;
+                break;
+            case ShowType.Sub_Negative_Aruco_Image:
+                toShow = subArucoAreaNegative;
+                break;
+            case ShowType.Sub_Negative_Aruco_Image_Gray:
+                toShow = subArucoAreaNegativeGray;
+                break;
+            case ShowType.Sub_Negative_Aruco_Image_Gray_Blur:
+                toShow = subArucoAreaNegativeGrayBlur;
+                break;
+            case ShowType.Sub_Negative_Aruco_Image_Gray_Binary:
+                toShow = subArucoAreaNegativeGrayBinary;
                 break;
             case ShowType.Shape_Sub_Aruco_Image:
                 toShow = shapeSubArucoArea;
