@@ -10,7 +10,7 @@ using System;
 using Emgu.CV.Util;
 using Emgu.CV.Aruco;
 
-public enum ShowType {
+public enum ShowType { // To display a different result in order to see the process & make adjustements if needed
     Plain_Aruco_Image,
     Sub_Aruco_Image,
     Sub_Negative_Aruco_Image,
@@ -20,27 +20,28 @@ public enum ShowType {
     Shape_Sub_Aruco_Image
 }
 
+// Detected simple shape enumeration
+enum Shape {
+    None,
+    Rectangle,
+    Triangle,
+    Circle
+}
+
 public class ShapeDetector : MonoBehaviour {
 
-    //Webcam
+
+    #region UnityComponents
+    public UnityEngine.UI.RawImage rawImage;
+    public Texture2D tex;
+    #endregion
+
+
+    #region EmguCV fields
+    //Webcam & webcamFrame
     private Emgu.CV.VideoCapture webcam;
     public Mat webcamFrame;
 
-    // Unity components
-    public UnityEngine.UI.RawImage rawImage;
-    public Texture2D tex;
-
-    [HideInInspector]
-    public string fileName;
-
-    [Range(0, 1)]
-    public double approxVar = 0.04; //Best value
-
-    public double areaThreshold = 250;
-
-    public ShowType showType;
-
-    /** Mat to show **/
     private Mat plainArucoImage;
     private Mat subArucoArea;
     private Mat subArucoAreaNegative;
@@ -48,93 +49,51 @@ public class ShapeDetector : MonoBehaviour {
     private Mat subArucoAreaNegativeGrayBlur;
     private Mat subArucoAreaNegativeGrayBinary;
     private Mat shapeSubArucoArea;
+    #endregion
 
+
+    #region EmguCV parameters
+    [Range(0, 1)]
+    public double approxVar = 0.04; //Best value
+    public double areaThreshold = 250;
+    #endregion
+
+    // What image should be diaplayed on screen
+    // Used as debug purpose
+    // Could be used to adjust use settings at each launch of the game
+    public ShowType showType;
+    
+    // Shape detected. If no shape detect, it is equal to NONE
     EShapeCombination combinationFound;
 
+    #region Camera framerate
     public float grabDelay = 0.1f;
     private float timer;
-
+    #endregion
 
     // Start is called before the first frame update
     void Start() {
-        // Debug.Log("starting webcam");
-        // Launch webcam capture
-        // Manière Sans webcam (video)
-        //webcam = new Emgu.CV.VideoCapture("D:\\Programmes\\UnityWorspace\\video.mp4");
-        // Manière Avec Webcam (flux de la webcam)
+
+        // Capture the webcam
         webcam = new Emgu.CV.VideoCapture(0, VideoCapture.API.DShow);
         webcamFrame = new Mat();
 
-        // Add event handler to the webcam
+        // Add event handler to the webcam to retrieve the frame if available
         webcam.ImageGrabbed += HandleWebcamQueryFrame;
-        // Demarage de la webcam
+
+        // Turning on camera
         webcam.Start();
 
-        // Retrieving unity webcam screen
+        // Retrieving unity display screen
         rawImage = GameObject.Find("WebcamScreen").GetComponent<UnityEngine.UI.RawImage>();
     }
 
-    private void DisplayFrameOnPlane() {
-        if (webcamFrame == null) return;
-        if (webcamFrame.IsEmpty) return;
-
-        int width = (int)rawImage.rectTransform.rect.width;
-        int height = (int)rawImage.rectTransform.rect.height;
-
-        // destroy existing texture
-        if (tex != null) {
-            Destroy(tex);
-            tex = null;
-        }
-
-        // creating new texture to hold our frame
-        tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
-
-        // Resize mat to the texture format
-        CvInvoke.Resize(webcamFrame, webcamFrame, new System.Drawing.Size(width, height));
-        // Convert to unity texture format ( RGBA )
-        CvInvoke.CvtColor(webcamFrame, webcamFrame, ColorConversion.Bgr2Rgba);
-        // Flipping because unity texture is inverted.
-        CvInvoke.Flip(webcamFrame, webcamFrame, FlipType.Vertical);
-
-        // loading texture in texture object
-        tex.LoadRawTextureData(webcamFrame.ToImage<Rgba, byte>().Bytes);
-        tex.Apply();
-
-        // assigning texture to gameObject
-        rawImage.texture = tex;
-    }
-
-    //private void HandleWebcamQueryFrame(object sender, System.EventArgs e) {
-
-    //    if (webcam == null) return;
-    //    if (webcam.IsOpened) {
-    //        webcam.Retrieve(webcamFrame);
-    //    }
-    //    if (webcamFrame == null) return;
-    //    if (webcamFrame.IsEmpty) return;
-
-    //    //Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
-
-    //    lock (webcamFrame) {
-    //        DisplayFrameOnPlane();
-
-    //        // webcamFrame = ProcessImage(webcamFrame);
-    //        //EShapeCombination combination = detector.GetShapeCombination(webcamFrame);
-    //        //Debug.Log("Combination : " + combination.ToString());
-    //    }
-
-    //    //System.Threading.Thread.Sleep(5);
-    //}
-
+    // Taking off event handler & closing the camera 
     void OnDestroy() {
-        //Debug.Log("entering destroy");
-
         if (webcam != null) {
             webcam.ImageGrabbed -= HandleWebcamQueryFrame;
 
             lock (webcam) {
-                //Debug.Log("sleeping");
                 //waiting for thread to finish before disposing the camera...(took a while to figure out)
                 System.Threading.Thread.Sleep(1000);
                 // close camera
@@ -144,6 +103,7 @@ public class ShapeDetector : MonoBehaviour {
         }
 
     }
+
 
     void Update() {
 
@@ -166,8 +126,10 @@ public class ShapeDetector : MonoBehaviour {
         }
     }
 
+    
     private void HandleWebcamQueryFrame(object sender, System.EventArgs e) {
 
+        // Retrieve the next camera frame if available
         if (webcam == null) return;
         if (webcam.IsOpened) {
             webcam.Retrieve(webcamFrame);
@@ -175,23 +137,27 @@ public class ShapeDetector : MonoBehaviour {
         if (webcamFrame == null) return;
         if (webcamFrame.IsEmpty) return;
 
-        //Debug.Log(webcamFrame.Rows + " " + webcamFrame.Height);
-
+        
         lock (webcamFrame) {
+            // Try to detect the shape combination on the frame
             combinationFound = GetShapeCombination(webcamFrame);
-            Debug.Log(combinationFound);
+
+            // Convert combination to spell
             Spell spell = SpellBuilder.ConvertShapeToSpell(combinationFound);
+
+            // Play spell on the ennemi
             Player player = FindObjectOfType<Player>();
             if (player != null) {
                 bool success = player.PlayCard(spell, GameManager.Instance.enemies[0]);
             }
             
+            // Display frame on screen
             RenderImage();
         }
-
-        //System.Threading.Thread.Sleep(5);
     }
 
+    // Reset image & texture
+    // Avoid errors in case we do not retrieve the frame but apply our process on them
     void ResetVariables() {
         plainArucoImage = new Mat();
         subArucoArea = new Mat();
@@ -208,12 +174,11 @@ public class ShapeDetector : MonoBehaviour {
         }
     }
 
+    // The main method : retrieve the shape combination from the frame
     public EShapeCombination GetShapeCombination(Mat frame) {
         ResetVariables();
 
         #region Aruco
-        ///** ARUCO MARKERS **/
-
         // Markers ID
         VectorOfInt markersID = new VectorOfInt();
 
@@ -228,13 +193,10 @@ public class ShapeDetector : MonoBehaviour {
         // dictionary of aruco's markers
         Dictionary dictMarkers = new Dictionary(Dictionary.PredefinedDictionaryName.Dict4X4_50);
 
-        //// convert image
-        //Mat grayFrame = new Mat(frame.Width, frame.Height, DepthType.Cv8U, 1);
-        //CvInvoke.CvtColor(frame, grayFrame, ColorConversion.Bgr2Gray);
-
         // detect markers
         ArucoInvoke.DetectMarkers(frame, dictMarkers, markersCorner, markersID, parameters, rejectedCandidates);
 
+        // Create debug image, copy & draw markers if any
         plainArucoImage = new Mat(frame.Width, frame.Height, DepthType.Cv8U, 3);
         frame.CopyTo(plainArucoImage);
 
@@ -242,13 +204,10 @@ public class ShapeDetector : MonoBehaviour {
             ArucoInvoke.DrawDetectedMarkers(plainArucoImage, markersCorner, markersID, new MCvScalar(0, 255, 0));
         }
 
-        //Guard
+        //Guard : if no markers, stoppping here & returning NONE
         if (markersCorner.Size != 4) {
             return EShapeCombination.NONE;
         }
-
-
-        /** CARD EXTRACTION **/
 
         // Compute Bounding Box from aruco markers
         PointF[] pointList = new PointF[4];
@@ -277,46 +236,40 @@ public class ShapeDetector : MonoBehaviour {
         VectorOfPointF boxList = new VectorOfPointF(pointList);
         System.Drawing.Rectangle boundingBox = CvInvoke.BoundingRectangle(boxList);
 
-        // Extraction
+        // Extraction of the sub image from the bounding box
         subArucoArea = new Mat(frame, boundingBox);
         #endregion
 
-        /** SHAPE DETECTION **/
-        Mat binaryMat = new Mat();
-        CvInvoke.Threshold(subArucoArea, binaryMat, 250, 500, ThresholdType.Binary);
-
+        // Invert the image in order for teh shape detection to not detect the image border as a rectangle
         CvInvoke.BitwiseNot(subArucoArea, subArucoAreaNegative);
 
+        // Convert image to gray scale
         Image<Bgr, byte> img = subArucoAreaNegative.ToImage<Bgr, byte>();
-
         CvInvoke.CvtColor(subArucoAreaNegative, subArucoAreaNegativeGray, ColorConversion.Bgr2Gray);
 
-        //CvInvoke.GaussianBlur(subArucoAreaNegativeGray, subArucoAreaNegativeGrayBlur, new Size(5, 5), 0);
-
+        // Thresholding the image to augment contrast between white and black shapes using Otzu method
         CvInvoke.Threshold(subArucoAreaNegativeGray, subArucoAreaNegativeGrayBinary, 0, 255, ThresholdType.Otsu);
-        //CvInvoke.AdaptiveThreshold(subArucoAreaNegativeGray, subArucoAreaNegativeGrayBinary, 255, AdaptiveThresholdType.MeanC, ThresholdType.Binary, 11, 2.0);
 
-        //Mat image = new Mat();
-        //CvInvoke.CvtColor(frame, image, ColorConversion.Bgr2Gray);
-
+        // Detecting contours on the previous image
         VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
         CvInvoke.FindContours(subArucoAreaNegativeGrayBinary, contours, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
 
-        //Filter small areas
+        //Filter small areas as we can still have some either from noise or from aruco markers
         VectorOfVectorOfPoint filteredContours = new VectorOfVectorOfPoint();
         for (int i = 0; i < contours.Size; i++) {
-
             double area = CvInvoke.ContourArea(contours[i], false);
             if (area > areaThreshold) {
                 filteredContours.Push(contours[i]);
             }
         }
 
-        //Guard
+        // If no countours or more than 2 contours found, return NONE.
         if (filteredContours.Size < 1 || filteredContours.Size > 2) {
             return EShapeCombination.NONE;
         }
 
+
+        // Form polygons from contours using their perimeters
         double outisdeArea = 0;
         Shape outsideShape = Shape.None;
         Shape insideShape = Shape.None;
@@ -336,6 +289,7 @@ public class ShapeDetector : MonoBehaviour {
             double area = CvInvoke.ContourArea(filteredContours[i], false);
             Shape currentShape = Shape.None;
 
+            // From the polygon number of sides, we retrieve the current shape
             if (approx.Size == 3) {
                 CvInvoke.PutText(img, "Triangle", new Point(x, y), FontFace.HersheySimplex, 0.5, new MCvScalar(0, 0, 255), 2);
                 currentShape = Shape.Triangle;
@@ -349,6 +303,7 @@ public class ShapeDetector : MonoBehaviour {
                 currentShape = Shape.Circle;
             }
 
+            // If there is multiple polygons detected, this source code
             if (area > outisdeArea) {
                 outisdeArea = area;
                 insideShape = outsideShape;
@@ -358,6 +313,7 @@ public class ShapeDetector : MonoBehaviour {
                 insideShape = currentShape;
             }
 
+            // Draw the shape and it's bounding box on 
             RotatedRect approxMinRect = CvInvoke.MinAreaRect(approx);
             RotatedRect minRect = CvInvoke.MinAreaRect(filteredContours[i]);
             img.Draw(minRect, new Bgr(System.Drawing.Color.Red), 2);
@@ -366,6 +322,7 @@ public class ShapeDetector : MonoBehaviour {
 
         shapeSubArucoArea = img.Mat;
 
+        // Return the detected shape combination depending on the outer and inner shape detected previously
         switch (outsideShape) {
             case Shape.None:
                 return EShapeCombination.NONE;
@@ -414,6 +371,7 @@ public class ShapeDetector : MonoBehaviour {
 
     }
 
+    // Simple render method to display corret image on screen
     void RenderImage() {
 
         int width = (int)rawImage.rectTransform.rect.width;
@@ -459,13 +417,6 @@ public class ShapeDetector : MonoBehaviour {
 
         // assigning texture to gameObject
         rawImage.texture = tex;
-    }
-
-    enum Shape {
-        None,
-        Rectangle,
-        Triangle,
-        Circle
     }
 
 }
