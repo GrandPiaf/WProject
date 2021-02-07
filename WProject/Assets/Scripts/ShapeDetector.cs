@@ -9,6 +9,7 @@ using System.Drawing;
 using System;
 using Emgu.CV.Util;
 using Emgu.CV.Aruco;
+using TMPro;
 
 public enum ShowType { // To display a different result in order to see the process & make adjustements if needed
     Plain_Aruco_Image,
@@ -34,6 +35,7 @@ public class ShapeDetector : MonoBehaviour {
     #region UnityComponents
     public UnityEngine.UI.RawImage rawImage;
     public Texture2D tex;
+    public TMP_Text speelText;
     #endregion
 
 
@@ -144,6 +146,8 @@ public class ShapeDetector : MonoBehaviour {
 
             // Convert combination to spell
             Spell spell = SpellBuilder.ConvertShapeToSpell(combinationFound);
+
+            speelText.text = spell.type.ToString();
 
             // Play spell on the ennemi
             Player player = FindObjectOfType<Player>();
